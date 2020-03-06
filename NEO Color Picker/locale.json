@@ -1,0 +1,14 @@
+{
+    "translations": {
+        "de": {
+            "Hex Color": "HEX Wert Farbe",
+            "Choose variable with profile ~HexColor": "Variable mit Variablenprofil ~HexColor aussuchen",
+            "Creating instance.": "Instanz erstellen",
+            "NEO Color Picker created.": "NEO Farbwähler erzeugt.",
+            "interface closed.":"Interface geschlossen",
+            "Please select a variable with profile ~HexColor": "Bitte eine Variable mit dem Variablenprofil ~HexColor auswählen",
+            "variable profile does not match ~HexColor": "Das Variablenprofil entspricht nicht ~HexColor",
+            "Variable (Profile ~HexColor)": "Variable (Profil ~HexColor)"
+        }
+    }
+}
