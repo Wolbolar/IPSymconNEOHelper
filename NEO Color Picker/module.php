@@ -78,7 +78,13 @@ class NEOColorPicker extends IPSModule
         return $check;
     }
 
-    public function WriteColor()
+    public function SetColor(string $color)
+    {
+        $this->SetValue('hexcolor', $color);
+        // $this->WriteColor();
+    }
+
+    protected function WriteColor()
     {
         $hex_color = GetValue($this->GetIDForIdent('hexcolor'));
         $color = hexdec($hex_color);
@@ -86,6 +92,7 @@ class NEOColorPicker extends IPSModule
         $ident = IPS_GetObject($objectid)['ObjectIdent'];
         $this->SendDebug('Hex Color', 'received ' . $hex_color . ', write value ' . $color . ' to object id ' . $objectid . ' with Ident ' . $ident, 0 );
         $parent = IPS_GetObject($objectid)['ParentID'];
+        $this->SendDebug('Hex Color', 'Parent ' . $parent, 0 );
         IPS_RequestAction($parent, $ident, $color);
         // $this->RequestAction($objectid, $color);
     }
@@ -118,7 +125,7 @@ class NEOColorPicker extends IPSModule
     public function RequestAction($Ident, $Value)
     {
         if ($Ident === 'hexcolor') {
-            $this->WriteColor();
+            $this->SetColor($Value);
         }
     }
 
