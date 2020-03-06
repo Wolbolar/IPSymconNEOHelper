@@ -45,7 +45,7 @@ class NEOColorPicker extends IPSModule
     public function MessageSink($TimeStamp, $SenderID, $Message, $Data)
     {
         $this->LogMessage('SenderID: ' . $SenderID . ', Message: ' . $Message . ', Data:' . json_encode($Data), KL_DEBUG);
-        $objectid         = $this->ReadPropertyInteger('ColorVariable');
+        $objectid         = $this->GetIDForIdent('hexcolor');
         if($Message == IM_CHANGESTATUS)
         {
             if ($Data[0] === IS_ACTIVE) {
@@ -60,7 +60,7 @@ class NEOColorPicker extends IPSModule
         }
         else
         {
-            if ($SenderID == $objectid && $objectid > 0) {
+            if ($SenderID == $objectid) {
                 $this->WriteColor();
                 $this->SendDebug('Hex color changed at', date('H:i', time()), 0);
                 $this->SendDebug(
