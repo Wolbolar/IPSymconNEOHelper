@@ -84,8 +84,8 @@ class NEOColorPicker extends IPSModule
         $color = hexdec($hex_color);
         $objectid         = $this->ReadPropertyInteger('ColorVariable');
         $ident = IPS_GetObject($objectid)['ObjectIdent'];
-        $this->SendDebug('Hex Color', 'received ' . $hex_color . ', write value ' . $color . ' to object id ' . $objectid, 0 );
-        $this->SetValue($ident, $color);
+        $this->SendDebug('Hex Color', 'received ' . $hex_color . ', write value ' . $color . ' to object id ' . $objectid . 'with Ident ' . $ident, 0 );
+        $this->RequestAction($objectid, $color);
     }
 
     protected function CheckVariableProfile($objectid)
