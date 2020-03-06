@@ -62,7 +62,7 @@ class NEOColorPicker extends IPSModule
         {
             if ($SenderID == $objectid) {
                 $this->WriteColor();
-                $this->SendDebug('Hex color changed at', date('H:i', time()), 0);
+                $this->SendDebug('Hex color changed at', date('H:i:s', time()), 0);
                 $this->SendDebug(
                     'Hex Color', 'Message from SenderID ' . $SenderID . ' with Message ' . $Message . '\r\n Data: ' . print_r($Data, true), 0
                 );
@@ -84,8 +84,10 @@ class NEOColorPicker extends IPSModule
         $color = hexdec($hex_color);
         $objectid         = $this->ReadPropertyInteger('ColorVariable');
         $ident = IPS_GetObject($objectid)['ObjectIdent'];
-        $this->SendDebug('Hex Color', 'received ' . $hex_color . ', write value ' . $color . ' to object id ' . $objectid . 'with Ident ' . $ident, 0 );
-        $this->RequestAction($objectid, $color);
+        $this->SendDebug('Hex Color', 'received ' . $hex_color . ', write value ' . $color . ' to object id ' . $objectid . ' with Ident ' . $ident, 0 );
+        $parent = IPS_GetObject($objectid)['ParentID'];
+        IPS_RequestAction($parent, $ident, $color);
+        // $this->RequestAction($objectid, $color);
     }
 
     protected function CheckVariableProfile($objectid)
@@ -100,6 +102,7 @@ class NEOColorPicker extends IPSModule
             elseif($profile == '~HexColor')
             {
                 $this->RegisterVariableString('hexcolor', 'Hex Color', '', 1);
+                $this->EnableAction('hexcolor');
                 $this->RegisterMessage($this->GetIDForIdent('hexcolor'), VM_UPDATE);
                 $this->SetStatus(IS_ACTIVE);
                 return true;
@@ -110,6 +113,13 @@ class NEOColorPicker extends IPSModule
             return false;
         }
         return false;
+    }
+
+    public function RequestAction($Ident, $Value)
+    {
+        if ($Ident === 'hexcolor') {
+            $this->WriteColor();
+        }
     }
 
     /***********************************************************
