@@ -2,11 +2,11 @@
     "id": "{46427E2C-5A6C-7246-E5D1-10C3AB0EA963}",
     "author": "Fonzo",
     "name": "NEO Helper Tools",
-    "url": "",
+    "url": "https://github.com/Wolbolar/IPSymconNEOHelper",
     "compatibility": {
         "version": "5.0"
     },
     "version": "1.0",
-    "build": 0,
+    "build": 1,
     "date": 0
 }
