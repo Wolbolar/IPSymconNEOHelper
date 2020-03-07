@@ -23,19 +23,23 @@
 			parent::ApplyChanges();
 		}
 
-        public function Open_Popup(string $remote, string $popup)
+        public function Open_Popup()
         {
-            return $this->SendData('Open_Popup');
+            $remote = $this->ReadPropertyString('remote');
+            $popup = $this->ReadPropertyString('popup');
+            return $this->SendData('Open_Popup', $remote, '', $popup);
         }
 
-        public function Close_Popup(string $remote)
+        public function Close_Popup()
         {
-            return $this->SendData('Close_Popup');
+            $remote = $this->ReadPropertyString('remote');
+            return $this->SendData('Close_Popup', $remote);
         }
 
-        public function Close_All_Popups(string $remote)
+        public function Close_All_Popups()
         {
-            return $this->SendData('Close_All_Popups');
+            $remote = $this->ReadPropertyString('remote');
+            return $this->SendData('Close_All_Popups', $remote);
         }
 
         /** Sends Request to IO and get response.
