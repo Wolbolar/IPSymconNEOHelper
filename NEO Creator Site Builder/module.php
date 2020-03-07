@@ -85,7 +85,7 @@
                 [
                     'code'    => IS_ACTIVE,
                     'icon'    => 'active',
-                    'caption' => 'NEO Color Picker created.'],
+                    'caption' => 'NEO Remote Site Builder created.'],
                 [
                     'code'    => IS_INACTIVE,
                     'icon'    => 'inactive',

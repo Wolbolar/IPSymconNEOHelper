@@ -1,8 +1,9 @@
 {
     "translations": {
         "de": {
-            "Translation 1": "Übersetzung 1",
-            "Translation 2": "Übersetzung 2"
+            "Creating instance.": "Instanz erstellen",
+            "NEO Remote Site Builder created.": "NEO Remote Seiten Kontrukteur erzeugt.",
+            "interface closed.":"Interface geschlossen"
         }
     }
 }

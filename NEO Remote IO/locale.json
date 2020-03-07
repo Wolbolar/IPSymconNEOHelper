@@ -1,8 +1,10 @@
 {
     "translations": {
         "de": {
-            "Translation 1": "Übersetzung 1",
-            "Translation 2": "Übersetzung 2"
+            "enter broadcast adress of network, example (192.168.55.255)": "Broadcast Adresse des Netzwerks eintragen, diese endet mit 255 z.B. (192.168.55.255)",
+            "Creating instance.": "Instanz erstellen",
+            "NEO Remote IO created.": "NEO Remote IO erzeugt.",
+            "interface closed.":"Interface geschlossen"
         }
     }
 }
