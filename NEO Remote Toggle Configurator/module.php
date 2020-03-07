@@ -84,7 +84,7 @@
                 [
                     'code'    => IS_ACTIVE,
                     'icon'    => 'active',
-                    'caption' => 'NEO Color Picker created.'],
+                    'caption' => 'NEO Remote Toogle Configurator created.'],
                 [
                     'code'    => IS_INACTIVE,
                     'icon'    => 'inactive',
