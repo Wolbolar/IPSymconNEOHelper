@@ -6,12 +6,10 @@
     "aliases": [
         "mControl Server"
     ],
-    "parentRequirements": [],
-    "childRequirements": [
-        "{C8792760-65CF-4C53-B5C7-A30FCC84FEFE}"
-    ],
+    "parentRequirements": ["{C8792760-65CF-4C53-B5C7-A30FCC84FEFE}"],
+    "childRequirements": ["{2D04CE25-7D3C-766A-35D4-37468CE9F0CA}"],
     "implemented": [
-        "{7A1272A4-CBDB-46EF-BFC6-DCF4A53D2FC7}"
+        "{7A1272A4-CBDB-46EF-BFC6-DCF4A53D2FC7}", "{380494EA-0572-B7F4-8CB9-B3221D10DE73}"
     ],
     "prefix": "NEO",
     "url": ""
