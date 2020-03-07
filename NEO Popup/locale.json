@@ -1,0 +1,13 @@
+{
+    "translations": {
+        "de": {
+            "NEO Remote Name": "NEO Remote Name",
+            "Remote Name": "Remote Name",
+            "NEO Remote Popup": "NEO Remote Popup",
+            "Popup Name": "Popup Name",
+            "Creating instance.": "Instanz erstellen",
+            "NEO Popup Loader created.": "NEO Popuplader erzeugt.",
+            "interface closed.":"Interface geschlossen"
+        }
+    }
+}

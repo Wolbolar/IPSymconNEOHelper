@@ -1,0 +1,18 @@
+{
+    "id": "{769976E0-A8E7-2AE1-BB46-F62974CF1DC3}",
+    "name": "mControl Server",
+    "type": 1,
+    "vendor": "Mediola",
+    "aliases": [
+        "mControl Server"
+    ],
+    "parentRequirements": [],
+    "childRequirements": [
+        "{C8792760-65CF-4C53-B5C7-A30FCC84FEFE}"
+    ],
+    "implemented": [
+        "{7A1272A4-CBDB-46EF-BFC6-DCF4A53D2FC7}"
+    ],
+    "prefix": "NEO",
+    "url": ""
+}
