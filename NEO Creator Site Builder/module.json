@@ -1,0 +1,14 @@
+{
+    "id": "{5E7878F7-FDFE-CC5B-D726-C9719FA418D2}",
+    "name": "NEO Creator Site Builder",
+    "type": 4,
+    "vendor": "Mediola",
+    "aliases": [
+        "NEO Creator Site Builder"
+    ],
+    "parentRequirements": [],
+    "childRequirements": [],
+    "implemented": [],
+    "prefix": "NEO",
+    "url": ""
+}

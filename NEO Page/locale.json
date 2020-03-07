@@ -1,0 +1,13 @@
+{
+    "translations": {
+        "de": {
+            "NEO Remote Name": "NEO Remote Name",
+            "Remote Name": "Remote Name",
+            "NEO Remote Page": "NEO Remote Page",
+            "Page Name": "Page Name",
+            "Creating instance.": "Instanz erstellen",
+            "NEO Page Loader created.": "NEO Seitenlader erzeugt.",
+            "interface closed.":"Interface geschlossen"
+        }
+    }
+}

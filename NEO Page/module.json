@@ -1,0 +1,18 @@
+{
+    "id": "{1C9BD973-E774-80F6-3292-28305F34A938}",
+    "name": "NEO Page",
+    "type": 3,
+    "vendor": "Mediola",
+    "aliases": [
+        "NEO Page"
+    ],
+    "parentRequirements": [
+        "{633311C7-8951-DD55-7E07-46DC07CB1C24}"
+    ],
+    "childRequirements": [],
+    "implemented": [
+        "{FC9EEF88-474E-09AF-444C-E14C47595F91}"
+    ],
+    "prefix": "NEO",
+    "url": ""
+}

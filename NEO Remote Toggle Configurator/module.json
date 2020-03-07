@@ -1,0 +1,14 @@
+{
+    "id": "{33485D2C-D1BB-6DB2-466E-4DD7A0CC16CF}",
+    "name": "NEO Remote Toggle Configurator",
+    "type": 4,
+    "vendor": "Mediola",
+    "aliases": [
+        "NEO Remote Toggle Configurator"
+    ],
+    "parentRequirements": [],
+    "childRequirements": [],
+    "implemented": [],
+    "prefix": "NEO",
+    "url": ""
+}

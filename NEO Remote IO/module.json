@@ -1,0 +1,18 @@
+{
+    "id": "{E576C24E-9CE7-AC47-6B67-EB9D44597A29}",
+    "name": "NEO Remote IO",
+    "type": 1,
+    "vendor": "Mediola",
+    "aliases": [
+        "NEO Remote IO"
+    ],
+    "parentRequirements": [],
+    "childRequirements": [
+        "{FC9EEF88-474E-09AF-444C-E14C47595F91}"
+    ],
+    "implemented": [
+        "{633311C7-8951-DD55-7E07-46DC07CB1C24}"
+    ],
+    "prefix": "NEO",
+    "url": ""
+}

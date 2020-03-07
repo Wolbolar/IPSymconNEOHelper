@@ -1,0 +1,18 @@
+{
+    "id": "{EC5F5B4D-7855-7FC9-244E-E9FC0764F7AE}",
+    "name": "NEO Popup",
+    "type": 3,
+    "vendor": "Mediola",
+    "aliases": [
+        "NEO Popup"
+    ],
+    "parentRequirements": [
+        "{633311C7-8951-DD55-7E07-46DC07CB1C24}"
+    ],
+    "childRequirements": [],
+    "implemented": [
+        "{FC9EEF88-474E-09AF-444C-E14C47595F91}"
+    ],
+    "prefix": "NEO",
+    "url": ""
+}
