@@ -1,8 +1,10 @@
 {
     "translations": {
         "de": {
-            "Translation 1": "Übersetzung 1",
-            "Translation 2": "Übersetzung 2"
+            "NEO mControl Device": "NEO mControl Gerät",
+            "Creating instance.": "Instanz erstellen",
+            "NEO mControl Device created.": "NEO mControl Gerät erzeugt.",
+            "interface closed.":"Interface geschlossen"
         }
     }
 }
