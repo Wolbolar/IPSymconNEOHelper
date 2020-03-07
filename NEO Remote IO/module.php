@@ -45,28 +45,29 @@ class NEORemoteIO extends IPSModule
 
         switch ($data->method) {
             case 'Open_Popup':
-                $getfields  = $buffer['getfields'];
-                $postfields = $buffer['postfields'];
+                $remote  = $buffer['remote'];
+                $popup = $buffer['popup'];
 
-                $result = $this->NpCommand($getfields, $postfields);
+                $result = $this->PopupOpen($remote, $popup);
                 break;
 
             case 'Close_Popup':
-                $getfields = $buffer['getfields'];
+                $remote  = $buffer['remote'];
 
-                $result = $this->NpPlayer($getfields);
+                $result = $this->PopupClose($remote);
                 break;
 
             case 'Close_All_Popups':
-                $getfields = $buffer['getfields'];
+                $remote  = $buffer['remote'];
 
-                $result = $this->NpQueue($getfields);
+                $result = $this->PopupCloseAll($remote);
                 break;
 
             case 'Load_Page':
-                $postfields = $buffer['postfields'];
+                $remote  = $buffer['remote'];
+                $page = $buffer['page'];
 
-                $result = $this->BehaviorsPreview($postfields);
+                $result = $this->Sitechange($remote, $page);
                 break;
 
             default:
