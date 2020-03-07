@@ -77,11 +77,7 @@
             $form = [
                 [
                     'type'  => 'Label',
-                    'label' => 'Choose variable with profile ~HexColor'],
-                [
-                    'name'    => 'ColorVariable',
-                    'type'    => 'SelectVariable',
-                    'caption' => 'Variable (Profile ~HexColor)']
+                    'label' => 'mControl Server Port 8082']
 
             ];
             return $form;
@@ -113,19 +109,11 @@
                 [
                     'code'    => IS_ACTIVE,
                     'icon'    => 'active',
-                    'caption' => 'NEO Color Picker created.'],
+                    'caption' => 'NEO mControl Server created.'],
                 [
                     'code'    => IS_INACTIVE,
                     'icon'    => 'inactive',
-                    'caption' => 'interface closed.'],
-                [
-                    'code'    => 201,
-                    'icon'    => 'error',
-                    'caption' => 'Please select a variable with profile ~HexColor'],
-                [
-                    'code'    => 202,
-                    'icon'    => 'error',
-                    'caption' => 'variable profile does not match ~HexColor']];
+                    'caption' => 'interface closed.']];
 
             return $form;
         }

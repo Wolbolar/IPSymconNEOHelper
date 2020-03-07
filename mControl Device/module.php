@@ -62,11 +62,7 @@
             $form = [
                 [
                     'type'  => 'Label',
-                    'label' => 'Choose variable with profile ~HexColor'],
-                [
-                    'name'    => 'ColorVariable',
-                    'type'    => 'SelectVariable',
-                    'caption' => 'Variable (Profile ~HexColor)']
+                    'label' => 'NEO mControl Device']
 
             ];
             return $form;
@@ -98,7 +94,7 @@
                 [
                     'code'    => IS_ACTIVE,
                     'icon'    => 'active',
-                    'caption' => 'NEO Color Picker created.'],
+                    'caption' => 'NEO mControl Device created.'],
                 [
                     'code'    => IS_INACTIVE,
                     'icon'    => 'inactive',
