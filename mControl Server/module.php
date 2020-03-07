@@ -43,7 +43,7 @@
             $data = json_decode($JSONString);
             $this->SendDebug('Splitter RECV', utf8_decode($data->Buffer), 0);
 
-            $this->SendDataToChildren(json_encode(Array("DataID" => "", $data->Buffer)));
+            $this->SendDataToChildren(json_encode(Array("DataID" => "{2D04CE25-7D3C-766A-35D4-37468CE9F0CA}", $data->Buffer)));
         }
 
 
