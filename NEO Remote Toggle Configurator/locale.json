@@ -8,7 +8,8 @@
             "Creating instance.": "Instanz erstellen",
             "NEO Remote Toogle Configurator created.": "NEO Remote Toogle Konfigurator erzeugt.",
             "interface closed.":"Interface geschlossen",
-            " Scripts": " Skripte"
+            " Scripts": " Skripte",
+            "First create the system instances in IP-Symcon. If the system is found, a setup button is available.": "Zunächst die Instanzen des Systems in IP-Symcon anlegen. Sollte das System gefunden werden, steht ein Setup Button zur Auswahl."
         }
     }
 }

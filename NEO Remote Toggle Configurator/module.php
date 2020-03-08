@@ -118,6 +118,19 @@ elseif ($status == true)// ausschalten
             }
         }
 
+        protected function CheckModule($module_guid)
+        {
+            $check = false;
+            foreach(IPS_GetModuleList() as $guid)
+            {
+                if($guid == $module_guid)
+                {
+                    $check = true;
+                }
+            }
+            return $check;
+        }
+
         /***********************************************************
          * Configuration Form
          ***********************************************************/
@@ -165,14 +178,21 @@ elseif ($status == true)// ausschalten
          */
         protected function FormActions()
         {
+            $check_homematic = $this->CheckModule('{EE4A81C6-5C90-4DB7-AD2F-F6BBD521412E}'); // Homematic
             $form = [
                 [
                     'type'  => 'Label',
-                    'caption' => 'Setup toogle for Homematic STATE variable'],
+                    'caption' => 'First create the system instances in IP-Symcon. If the system is found, a setup button is available.',
+                    'visible'  => true],
+                [
+                    'type'  => 'Label',
+                    'caption' => 'Setup toogle for Homematic STATE variable',
+                    'visible'  => $check_homematic],
                 [
                     'type'    => 'Button',
                     'caption'   => 'Homematic Setup',
-                    'onClick' => 'NEO_SetupHomematicToggle($id);']
+                    'onClick' => 'NEO_SetupHomematicToggle($id);',
+                    'visible'  => $check_homematic]
             ];
             return $form;
         }
