@@ -1,9 +1,14 @@
 {
     "translations": {
         "de": {
+            "category toggle scripts": "Kategorie Toggle Skripte",
+            "Creates a script for every boolean variable with variableprofile ~Switch for NEO": "Erzeugt ein Skript für jede Boolean Variable mit Variablenprofil ~Switch für NEO",
+            "Setup toogle for Homematic STATE variable": "Setup toogle für Homematic STATE Variable",
+            "Homematic Setup": "Homematic Setup",
             "Creating instance.": "Instanz erstellen",
             "NEO Remote Toogle Configurator created.": "NEO Remote Toogle Konfigurator erzeugt.",
-            "interface closed.":"Interface geschlossen"
+            "interface closed.":"Interface geschlossen",
+            " Scripts": " Skripte"
         }
     }
 }
