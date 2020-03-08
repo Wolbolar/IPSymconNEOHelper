@@ -171,7 +171,7 @@
                 [
                     'code'    => IS_ACTIVE,
                     'icon'    => 'active',
-                    'caption' => 'NEO Color Picker created.'],
+                    'caption' => 'NEO Popup Loader created.'],
                 [
                     'code'    => IS_INACTIVE,
                     'icon'    => 'inactive',
