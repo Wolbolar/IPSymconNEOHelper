@@ -25,6 +25,11 @@
             $this->SetupToggleScripts('Homematic');
         }
 
+        public function SetupSonosToggle()
+        {
+            $this->SetupToggleScripts('Sonos');
+        }
+
         protected function SetupToggleScripts($type)
         {
             $cat_id = $this->ReadPropertyInteger('ImportCategoryID');
@@ -59,6 +64,11 @@
                 $guid = '{EE4A81C6-5C90-4DB7-AD2F-F6BBD521412E}'; // Homematic
             }
 
+            if($type == 'Sonos')
+            {
+                $guid = '{52F6586D-A1C7-AAC6-309B-E12A70F6EEF6}'; // Sonos
+            }
+
             $InstanzenListe = IPS_GetInstanceListByModuleID($guid);
             $InstanzCount = 0;
 
@@ -70,9 +80,9 @@
                     $var_profile = IPS_GetVariable($variable)['VariableProfile'];
                     $custom_var_profile = IPS_GetVariable($variable)['VariableCustomProfile'];
                     $ident = IPS_GetObject($variable)['ObjectIdent'];
-                    if(($var_profile == "~Switch" || $custom_var_profile == "~Switch") && $ident == 'STATE')
+                    if(($var_profile == "~Switch" || $custom_var_profile == "~Switch") && ($ident == 'STATE' || $ident == 'Mute' || $ident == 'Loudness' || $ident == 'Crossfade'))
                     {
-                        $this->createPowerToggle($ScriptCategoryID, $InstanzID);
+                        $this->createPowerToggle($ScriptCategoryID, $InstanzID, $type);
                     }
                 }
             }
@@ -80,27 +90,48 @@
             $this->SendDebug('NEO Toggle Install', $InstanzCount . ' of ' . $type . 'instances found', 0);
         }
 
-        protected function createPowerToggle($ScriptCategoryID, $InstanzID)
+        protected function createPowerToggle($ScriptCategoryID, $InstanzID, $type)
         {
-            $Name = IPS_GetName($InstanzID);
-            $ScriptName = $Name."_Power toggle";
             $StatusID = @IPS_GetObjectIDByIdent("STATE", $InstanzID);
             if ($StatusID)
             {
-                $ScriptID = @IPS_GetObjectIDByIdent("Togglescript_".$InstanzID, $ScriptCategoryID);
-                if($ScriptID)
-                {
-                    $this->SendDebug('NEO Toggle Install', "Es existiert bereits ein Toggle Skript für die Variable ".$StatusID."!", 0);
-                }
-                else
-                {
-                    $ScriptID = IPS_CreateScript(0);
-                    IPS_SetName($ScriptID, $ScriptName);
-                    IPS_SetIdent($ScriptID, "Togglescript_".$InstanzID);
-                    IPS_SetParent($ScriptID, $ScriptCategoryID);
-                    $contentPowertoggle = '<?php
+                $this->WriteToogleScript($ScriptCategoryID, $InstanzID, $StatusID, $type);
+            }
+            $StatusID = @IPS_GetObjectIDByIdent("Mute", $InstanzID);
+            if ($StatusID)
+            {
+                $this->WriteToogleScript($ScriptCategoryID, $InstanzID, $StatusID, $type);
+            }
+            $StatusID = @IPS_GetObjectIDByIdent("Loudness", $InstanzID);
+            if ($StatusID)
+            {
+                $this->WriteToogleScript($ScriptCategoryID, $InstanzID, $StatusID, $type);
+            }
+            $StatusID = @IPS_GetObjectIDByIdent("Crossfade", $InstanzID);
+            if ($StatusID)
+            {
+                $this->WriteToogleScript($ScriptCategoryID, $InstanzID, $StatusID, $type);
+            }
+        }
+
+        protected function WriteToogleScript($ScriptCategoryID, $InstanzID, $StatusID, $type)
+        {
+            $Name = IPS_GetName($InstanzID);
+            $ScriptName = $Name."_Power toggle";
+            $ScriptID = @IPS_GetObjectIDByIdent("Togglescript_".$InstanzID, $ScriptCategoryID);
+            if($ScriptID)
+            {
+                $this->SendDebug('NEO Toggle Install', "Es existiert bereits ein Toggle Skript für die Variable ".$StatusID."!", 0);
+            }
+            else
+            {
+                $ScriptID = IPS_CreateScript(0);
+                IPS_SetName($ScriptID, $ScriptName);
+                IPS_SetIdent($ScriptID, "Togglescript_".$InstanzID);
+                IPS_SetParent($ScriptID, $ScriptCategoryID);
+                $contentPowertoggle = '<?php
 $status = GetValueBoolean('.$StatusID.'); // Status des Geräts auslesen
-IPS_LogMessage( "Homematic:" , "NEO Script toggle" );
+IPS_LogMessage( "'.$type.':" , "NEO Script toggle" );
 if ($status == false)// einschalten
 	{
 	  IPS_LogMessage( "'.$Name.':" , "Anschalten" );
@@ -111,10 +142,9 @@ elseif ($status == true)// ausschalten
       IPS_LogMessage( "'.$Name.':" , "Ausschalten" );
       RequestAction('.$StatusID.', false);
 	}';
-                    IPS_SetScriptContent($ScriptID, $contentPowertoggle);
-                    $this->SendDebug('NEO Toggle Install', "Es wurde ein Skript mit der Objekt ID  ".$ScriptID." für die Variable mit der Objekt ID ".$StatusID." angelegt!", 0);
-                    IPS_LogMessage("NEO Toggle Install", "Es wurde ein Skript mit der Objekt ID  ".$ScriptID." für die Variable mit der Objekt ID ".$StatusID." angelegt!");
-                }
+                IPS_SetScriptContent($ScriptID, $contentPowertoggle);
+                $this->SendDebug('NEO Toggle Install', "Es wurde ein Skript mit der Objekt ID  ".$ScriptID." für die Variable mit der Objekt ID ".$StatusID." angelegt!", 0);
+                IPS_LogMessage("NEO Toggle Install", "Es wurde ein Skript mit der Objekt ID  ".$ScriptID." für die Variable mit der Objekt ID ".$StatusID." angelegt!");
             }
         }
 
@@ -179,6 +209,7 @@ elseif ($status == true)// ausschalten
         protected function FormActions()
         {
             $check_homematic = $this->CheckModule('{EE4A81C6-5C90-4DB7-AD2F-F6BBD521412E}'); // Homematic
+            $check_sonos = $this->CheckModule('{52F6586D-A1C7-AAC6-309B-E12A70F6EEF6}'); // Sonos
             $form = [
                 [
                     'type'  => 'Label',
@@ -192,7 +223,16 @@ elseif ($status == true)// ausschalten
                     'type'    => 'Button',
                     'caption'   => 'Homematic Setup',
                     'onClick' => 'NEO_SetupHomematicToggle($id);',
-                    'visible'  => $check_homematic]
+                    'visible'  => $check_homematic],
+                [
+                    'type'  => 'Label',
+                    'caption' => 'Setup toogle for Sonos Mute, Loudness, Crosfade variable',
+                    'visible'  => $check_sonos],
+                [
+                    'type'    => 'Button',
+                    'caption'   => 'Homematic Setup',
+                    'onClick' => 'NEO_SetupSonosToggle($id);',
+                    'visible'  => $check_sonos]
             ];
             return $form;
         }

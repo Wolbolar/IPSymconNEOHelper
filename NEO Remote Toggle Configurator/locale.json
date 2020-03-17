@@ -4,6 +4,7 @@
             "category toggle scripts": "Kategorie Toggle Skripte",
             "Creates a script for every boolean variable with variableprofile ~Switch for NEO": "Erzeugt ein Skript für jede Boolean Variable mit Variablenprofil ~Switch für NEO",
             "Setup toogle for Homematic STATE variable": "Setup toogle für Homematic STATE Variable",
+            "Setup toogle for Sonos Mute, Loudness, Crossfade variable": "Setup toogle für Sonos Mute, Loudness, Crossfade Variable",
             "Homematic Setup": "Homematic Setup",
             "Creating instance.": "Instanz erstellen",
             "NEO Remote Toogle Configurator created.": "NEO Remote Toogle Konfigurator erzeugt.",
