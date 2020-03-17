@@ -230,7 +230,7 @@ elseif ($status == true)// ausschalten
                     'visible'  => $check_sonos],
                 [
                     'type'    => 'Button',
-                    'caption'   => 'Homematic Setup',
+                    'caption'   => 'Sonos Setup',
                     'onClick' => 'NEO_SetupSonosToggle($id);',
                     'visible'  => $check_sonos]
             ];
