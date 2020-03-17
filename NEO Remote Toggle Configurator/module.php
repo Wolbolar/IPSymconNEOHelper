@@ -77,12 +77,16 @@
                 $childs = IPS_GetChildrenIDs($InstanzID);
                 foreach($childs as $variable)
                 {
-                    $var_profile = IPS_GetVariable($variable)['VariableProfile'];
-                    $custom_var_profile = IPS_GetVariable($variable)['VariableCustomProfile'];
-                    $ident = IPS_GetObject($variable)['ObjectIdent'];
-                    if(($var_profile == "~Switch" || $custom_var_profile == "~Switch") && ($ident == 'STATE' || $ident == 'Mute' || $ident == 'Loudness' || $ident == 'Crossfade'))
+                    $type = IPS_GetObject($variable)['ObjectType'];
+                    if($type == 2)
                     {
-                        $this->createPowerToggle($ScriptCategoryID, $InstanzID, $type);
+                        $var_profile = IPS_GetVariable($variable)['VariableProfile'];
+                        $custom_var_profile = IPS_GetVariable($variable)['VariableCustomProfile'];
+                        $ident = IPS_GetObject($variable)['ObjectIdent'];
+                        if(($var_profile == "~Switch" || $custom_var_profile == "~Switch") && ($ident == 'STATE' || $ident == 'Mute' || $ident == 'Loudness' || $ident == 'Crossfade'))
+                        {
+                            $this->createPowerToggle($ScriptCategoryID, $InstanzID, $type);
+                        }
                     }
                 }
             }
