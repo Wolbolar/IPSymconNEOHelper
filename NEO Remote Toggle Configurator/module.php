@@ -77,8 +77,8 @@
                 $childs = IPS_GetChildrenIDs($InstanzID);
                 foreach($childs as $variable)
                 {
-                    $type = IPS_GetObject($variable)['ObjectType'];
-                    if($type == 2)
+                    $object_type = IPS_GetObject($variable)['ObjectType'];
+                    if($object_type == 2)
                     {
                         $var_profile = IPS_GetVariable($variable)['VariableProfile'];
                         $custom_var_profile = IPS_GetVariable($variable)['VariableCustomProfile'];
@@ -91,7 +91,7 @@
                 }
             }
 
-            $this->SendDebug('NEO Toggle Install', $InstanzCount . ' of ' . $type . 'instances found', 0);
+            $this->SendDebug('NEO Toggle Install', $InstanzCount . ' of ' . $type . ' instances found', 0);
         }
 
         protected function createPowerToggle($ScriptCategoryID, $InstanzID, $type)
