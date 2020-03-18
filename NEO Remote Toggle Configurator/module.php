@@ -139,12 +139,12 @@ $status = GetValueBoolean('.$StatusID.'); // Status des Geräts auslesen
 IPS_LogMessage( "'.$type.' '.$var_name.':" , "NEO Script toggle" );
 if ($status == false)// einschalten
 	{
-	  IPS_LogMessage( "'.$Name.':" , "Anschalten" );
+	  IPS_LogMessage( "'.$Name.' '.$var_name.':" , "Anschalten" );
       RequestAction('.$StatusID.', true);
     }
 elseif ($status == true)// ausschalten
 	{
-      IPS_LogMessage( "'.$Name.':" , "Ausschalten" );
+      IPS_LogMessage( "'.$Name.' '.$var_name.':" , "Ausschalten" );
       RequestAction('.$StatusID.', false);
 	}';
                 IPS_SetScriptContent($ScriptID, $contentPowertoggle);
