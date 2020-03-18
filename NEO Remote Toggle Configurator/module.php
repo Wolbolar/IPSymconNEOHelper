@@ -83,7 +83,7 @@
                         $var_profile = IPS_GetVariable($variable)['VariableProfile'];
                         $custom_var_profile = IPS_GetVariable($variable)['VariableCustomProfile'];
                         $ident = IPS_GetObject($variable)['ObjectIdent'];
-                        if(($var_profile == "~Switch" || $custom_var_profile == "~Switch") && ($ident == 'STATE' || $ident == 'Mute' || $ident == 'Loudness' || $ident == 'Crossfade'))
+                        if(($var_profile == "~Switch" || $custom_var_profile == "~Switch" || $var_profile == "SONOS.Switch") && ($ident == 'STATE' || $ident == 'Mute' || $ident == 'Loudness' || $ident == 'Crossfade'))
                         {
                             $this->createPowerToggle($ScriptCategoryID, $InstanzID, $type);
                         }
