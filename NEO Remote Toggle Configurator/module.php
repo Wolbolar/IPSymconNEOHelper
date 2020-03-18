@@ -121,8 +121,9 @@
         protected function WriteToogleScript($ScriptCategoryID, $InstanzID, $StatusID, $type)
         {
             $Name = IPS_GetName($InstanzID);
-            $ScriptName = $Name."_Power toggle";
-            $ScriptID = @IPS_GetObjectIDByIdent("Togglescript_".$InstanzID, $ScriptCategoryID);
+            $var_name = IPS_GetName($StatusID);
+            $ScriptName = $Name." ".$var_name." toggle";
+            $ScriptID = @IPS_GetObjectIDByIdent("Togglescript_".$StatusID."_".$InstanzID, $ScriptCategoryID);
             if($ScriptID)
             {
                 $this->SendDebug('NEO Toggle Install', "Es existiert bereits ein Toggle Skript für die Variable ".$StatusID."!", 0);
@@ -131,11 +132,11 @@
             {
                 $ScriptID = IPS_CreateScript(0);
                 IPS_SetName($ScriptID, $ScriptName);
-                IPS_SetIdent($ScriptID, "Togglescript_".$InstanzID);
+                IPS_SetIdent($ScriptID, "Togglescript_".$StatusID."_".$InstanzID);
                 IPS_SetParent($ScriptID, $ScriptCategoryID);
                 $contentPowertoggle = '<?php
 $status = GetValueBoolean('.$StatusID.'); // Status des Geräts auslesen
-IPS_LogMessage( "'.$type.':" , "NEO Script toggle" );
+IPS_LogMessage( "'.$type.' '.$var_name.':" , "NEO Script toggle" );
 if ($status == false)// einschalten
 	{
 	  IPS_LogMessage( "'.$Name.':" , "Anschalten" );
