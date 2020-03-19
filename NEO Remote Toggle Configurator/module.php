@@ -22,59 +22,62 @@
 
 		public function SetupHomematicToggle()
         {
-            $this->SetupToggleScripts('Homematic');
+            $this->SetupToggleScripts('Homematic', '{EE4A81C6-5C90-4DB7-AD2F-F6BBD521412E}');
         }
 
         public function SetupSonosToggle()
         {
-            $this->SetupToggleScripts('Sonos');
+            $this->SetupToggleScripts('Sonos', '{52F6586D-A1C7-AAC6-309B-E12A70F6EEF6}');
         }
 
         public function SetupEchoRemoteToggle()
         {
-            $this->SetupToggleScripts('Echo Remote');
+            $this->SetupToggleScripts('Echo Remote', '{496AB8B5-396A-40E4-AF41-32F4C48AC90D}');
         }
 
         public function SetupHueToggle()
         {
-            $this->SetupToggleScripts('Hue');
+            $this->SetupToggleScripts('Hue', '{83354C26-2732-427C-A781-B3F5CDF758B1}');
         }
 
         public function SetupEnigma2BYToggle()
         {
-            $this->SetupToggleScripts('Enigma 2 BY');
+            $this->SetupToggleScripts('Enigma 2 BY', '{A2938F57-E1E2-427A-92FA-5F43EFF1F3FF}');
         }
 
         public function SetupPlaystationToggle()
         {
-            $this->SetupToggleScripts('Playstation 4');
+            $this->SetupToggleScripts('Playstation 4', '{D4AF1A75-D35E-4592-944D-67736220182E}');
         }
 
-        protected function SetupToggleScripts($type)
+        protected function SetupToggleScripts($type, $guid)
         {
             $cat_id = $this->ReadPropertyInteger('ImportCategoryID');
             if($cat_id > 0)
             {
-                $ScriptCategoryID = $this->CreateToggleScriptCategory($type);
-                $this->CreateToggleScripts($ScriptCategoryID, $type);
+                $ScriptCategoryID = $this->CreateCategory($cat_id, $type, 0);
+                $this->CreateToggleScripts($ScriptCategoryID, $type, $guid);
             }
-        }
-
-        protected function CreateToggleScriptCategory($type)
-        {
-            $CategoryID = $this->ReadPropertyInteger('ImportCategoryID');
-            $ScriptCategoryID = $this->CreateCategory($CategoryID, $type, $CategoryID);
-            return $ScriptCategoryID;
         }
 
         protected function CreateCategory($ParentCategoryID, $type, $InstanzID)
         {
             //Prüfen ob Kategorie schon existiert
-            $CategoryID = @IPS_GetObjectIDByIdent('Cat' . $InstanzID .'Scripts', $ParentCategoryID);
+            if($InstanzID === 0)
+            {
+                $ident = $this->CreateIdent($type);
+            }
+            else
+            {
+                $ident = "_".$InstanzID."_";
+            }
+            $this->SendDebug('Ident', $ident, 0);
+            $CategoryID = @IPS_GetObjectIDByIdent('Cat' . $ident .'Scripts', $ParentCategoryID);
             if ($CategoryID === false) {
                 $CategoryID = IPS_CreateCategory();
                 IPS_SetName($CategoryID, $type . $this->Translate(' Scripts'));
-                IPS_SetIdent($CategoryID, 'Cat' . $InstanzID .'Scripts');
+                $this->SendDebug('Create Category', 'Ident '.$ident, 0);
+                IPS_SetIdent($CategoryID, 'Cat' . $ident .'Scripts');
                 IPS_SetInfo($CategoryID, $type . $this->Translate(' Scripts'));
                 IPS_SetParent($CategoryID, $ParentCategoryID);
             }
@@ -233,39 +236,8 @@
             return $str;
         }
 
-        protected function CreateToggleScripts($ScriptCategoryID, $type)
+        protected function CreateToggleScripts($ScriptCategoryID, $type, $guid)
         {
-            if($type == 'Homematic')
-            {
-                $guid = '{EE4A81C6-5C90-4DB7-AD2F-F6BBD521412E}'; // Homematic
-            }
-
-            if($type == 'Sonos')
-            {
-                $guid = '{52F6586D-A1C7-AAC6-309B-E12A70F6EEF6}'; // Sonos
-            }
-
-            if($type == 'Echo Remote')
-            {
-                $guid = '{496AB8B5-396A-40E4-AF41-32F4C48AC90D}'; // Echo Remote
-            }
-
-            if($type == 'Hue')
-            {
-                $guid = '{83354C26-2732-427C-A781-B3F5CDF758B1}'; // Hue
-            }
-
-            if($type == 'Enigma 2 BY')
-            {
-                $guid = '{A2938F57-E1E2-427A-92FA-5F43EFF1F3FF}'; // Enigma 2 BY
-            }
-
-            if($type == 'Playstation 4')
-            {
-                $guid = '{D4AF1A75-D35E-4592-944D-67736220182E}'; // Playstation 4
-            }
-
-
             $InstanzenListe = IPS_GetInstanceListByModuleID($guid);
             $InstanzCount = 0;
 
@@ -340,7 +312,14 @@ elseif ($status == true)// ausschalten
             {
                 if($guid == $module_guid)
                 {
-                    $check = true;
+                    $InstanzenListe = IPS_GetInstanceListByModuleID($module_guid);
+                    if(empty($InstanzenListe))
+                    {
+                        $check = false;
+                    }
+                    else{
+                        $check = true;
+                    }
                 }
             }
             return $check;
