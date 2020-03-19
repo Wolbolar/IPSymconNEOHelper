@@ -30,6 +30,26 @@
             $this->SetupToggleScripts('Sonos');
         }
 
+        public function SetupEchoRemoteToggle()
+        {
+            $this->SetupToggleScripts('Echo Remote');
+        }
+
+        public function SetupHueToggle()
+        {
+            $this->SetupToggleScripts('Hue');
+        }
+
+        public function SetupEnigma2BYToggle()
+        {
+            $this->SetupToggleScripts('Enigma 2 BY');
+        }
+
+        public function SetupPlaystationToggle()
+        {
+            $this->SetupToggleScripts('Playstation 4');
+        }
+
         protected function SetupToggleScripts($type)
         {
             $cat_id = $this->ReadPropertyInteger('ImportCategoryID');
@@ -43,18 +63,174 @@
         protected function CreateToggleScriptCategory($type)
         {
             $CategoryID = $this->ReadPropertyInteger('ImportCategoryID');
-            //Prüfen ob Kategorie schon existiert
-            $ScriptCategoryID = @IPS_GetObjectIDByIdent('Cat' . $type .'Scripts', $CategoryID);
-            if ($ScriptCategoryID === false) {
-                $ScriptCategoryID = IPS_CreateCategory();
-                IPS_SetName($ScriptCategoryID, $type . $this->Translate(' Scripts'));
-                IPS_SetIdent($ScriptCategoryID, 'Cat' . $type .'Scripts');
-                IPS_SetInfo($ScriptCategoryID, $type . $this->Translate(' Scripts'));
-                IPS_SetParent($ScriptCategoryID, $CategoryID);
-            }
-            $this->SendDebug($type . ' Script Category', strval($ScriptCategoryID), 0);
-
+            $ScriptCategoryID = $this->CreateCategory($CategoryID, $type, $CategoryID);
             return $ScriptCategoryID;
+        }
+
+        protected function CreateCategory($ParentCategoryID, $type, $InstanzID)
+        {
+            //Prüfen ob Kategorie schon existiert
+            $CategoryID = @IPS_GetObjectIDByIdent('Cat' . $InstanzID .'Scripts', $ParentCategoryID);
+            if ($CategoryID === false) {
+                $CategoryID = IPS_CreateCategory();
+                IPS_SetName($CategoryID, $type . $this->Translate(' Scripts'));
+                IPS_SetIdent($CategoryID, 'Cat' . $InstanzID .'Scripts');
+                IPS_SetInfo($CategoryID, $type . $this->Translate(' Scripts'));
+                IPS_SetParent($CategoryID, $ParentCategoryID);
+            }
+            $this->SendDebug($type . ' Script Category', strval($CategoryID), 0);
+
+            return $CategoryID;
+        }
+
+        protected function CreateIdent($str)
+        {
+            $search  = [
+                'ä',
+                'ö',
+                'ü',
+                'ß',
+                'Ä',
+                'Ö',
+                'Ü',
+                '&',
+                'é',
+                'á',
+                'ó',
+                ' :)',
+                ' :D',
+                ' :-)',
+                ' :P',
+                ' :O',
+                ' ;D',
+                ' ;)',
+                ' ^^',
+                ' :|',
+                ' :-/',
+                ':)',
+                ':D',
+                ':-)',
+                ':P',
+                ':O',
+                ';D',
+                ';)',
+                '^^',
+                ':|',
+                ':-/',
+                '(',
+                ')',
+                '[',
+                ']',
+                '<',
+                '>',
+                '!',
+                '"',
+                '§',
+                '$',
+                '%',
+                '&',
+                '/',
+                '(',
+                ')',
+                '=',
+                '?',
+                '`',
+                '´',
+                '*',
+                "'",
+                '-',
+                ':',
+                ';',
+                '²',
+                '³',
+                '{',
+                '}',
+                '\\',
+                '~',
+                '#',
+                '+',
+                '.',
+                ',',
+                '=',
+                ':',
+                '=)', ];
+            $replace = [
+                'ae',
+                'oe',
+                'ue',
+                'ss',
+                'Ae',
+                'Oe',
+                'Ue',
+                'und',
+                'e',
+                'a',
+                'o',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '', ];
+
+            $str = str_replace($search, $replace, $str);
+            $str = str_replace(' ', '_', $str); // Replaces all spaces with underline.
+            $how = '_';
+            //$str = strtolower(preg_replace("/[^a-zA-Z0-9]+/", trim($how), $str));
+            $str = preg_replace('/[^a-zA-Z0-9]+/', trim($how), $str);
+
+            return $str;
         }
 
         protected function CreateToggleScripts($ScriptCategoryID, $type)
@@ -69,10 +245,32 @@
                 $guid = '{52F6586D-A1C7-AAC6-309B-E12A70F6EEF6}'; // Sonos
             }
 
+            if($type == 'Echo Remote')
+            {
+                $guid = '{496AB8B5-396A-40E4-AF41-32F4C48AC90D}'; // Echo Remote
+            }
+
+            if($type == 'Hue')
+            {
+                $guid = '{83354C26-2732-427C-A781-B3F5CDF758B1}'; // Hue
+            }
+
+            if($type == 'Enigma 2 BY')
+            {
+                $guid = '{A2938F57-E1E2-427A-92FA-5F43EFF1F3FF}'; // Enigma 2 BY
+            }
+
+            if($type == 'Playstation 4')
+            {
+                $guid = '{D4AF1A75-D35E-4592-944D-67736220182E}'; // Playstation 4
+            }
+
+
             $InstanzenListe = IPS_GetInstanceListByModuleID($guid);
             $InstanzCount = 0;
 
             foreach ($InstanzenListe as $InstanzID) {
+
                 $InstanzCount++;
                 $childs = IPS_GetChildrenIDs($InstanzID);
                 foreach($childs as $variable)
@@ -83,9 +281,11 @@
                         $var_profile = IPS_GetVariable($variable)['VariableProfile'];
                         $custom_var_profile = IPS_GetVariable($variable)['VariableCustomProfile'];
                         $ident = IPS_GetObject($variable)['ObjectIdent'];
-                        if(($var_profile == "~Switch" || $custom_var_profile == "~Switch" || $var_profile == "SONOS.Switch") && ($ident == 'STATE' || $ident == 'Mute' || $ident == 'Loudness' || $ident == 'Crossfade'))
+                        if(($var_profile == "~Switch" || $custom_var_profile == "~Switch" || $var_profile == "SONOS.Switch" || $var_profile == "Echo.Remote.Mute"  || $var_profile == "E2BY.inaktiv.aktiv" || $var_profile == "E2BY.inaktiv.aktiv.Reversed") && ($ident == 'STATE' || $ident == 'Mute' || $ident == 'Loudness' || $ident == 'Crossfade' || $ident == 'EchoShuffle' || $ident == 'EchoRepeat' || $ident == 'HUE_State' || $ident == 'AC3DownmixStatusVAR' || $ident == 'MuteVAR' || $ident == 'PS4_Power'))
                         {
-                            $this->createPowerToggle($ScriptCategoryID, $InstanzID, $type);
+                            $name = IPS_GetName($InstanzID);
+                            $instance_category = $this->CreateCategory($ScriptCategoryID, $name, $InstanzID);
+                            $this->createPowerToggle($instance_category, $InstanzID, $type, $ident);
                         }
                     }
                 }
@@ -94,47 +294,26 @@
             $this->SendDebug('NEO Toggle Install', $InstanzCount . ' of ' . $type . ' instances found', 0);
         }
 
-        protected function createPowerToggle($ScriptCategoryID, $InstanzID, $type)
+        protected function createPowerToggle($ScriptCategoryID, $InstanzID, $type, $ident)
         {
-            $StatusID = @IPS_GetObjectIDByIdent("STATE", $InstanzID);
+            $StatusID = @IPS_GetObjectIDByIdent($ident, $InstanzID);
             if ($StatusID)
             {
-                $this->WriteToogleScript($ScriptCategoryID, $InstanzID, $StatusID, $type);
-            }
-            $StatusID = @IPS_GetObjectIDByIdent("Mute", $InstanzID);
-            if ($StatusID)
-            {
-                $this->WriteToogleScript($ScriptCategoryID, $InstanzID, $StatusID, $type);
-            }
-            $StatusID = @IPS_GetObjectIDByIdent("Loudness", $InstanzID);
-            if ($StatusID)
-            {
-                $this->WriteToogleScript($ScriptCategoryID, $InstanzID, $StatusID, $type);
-            }
-            $StatusID = @IPS_GetObjectIDByIdent("Crossfade", $InstanzID);
-            if ($StatusID)
-            {
-                $this->WriteToogleScript($ScriptCategoryID, $InstanzID, $StatusID, $type);
-            }
-        }
-
-        protected function WriteToogleScript($ScriptCategoryID, $InstanzID, $StatusID, $type)
-        {
-            $Name = IPS_GetName($InstanzID);
-            $var_name = IPS_GetName($StatusID);
-            $ScriptName = $Name." ".$var_name." toggle";
-            $ScriptID = @IPS_GetObjectIDByIdent("Togglescript_".$StatusID."_".$InstanzID, $ScriptCategoryID);
-            if($ScriptID)
-            {
-                $this->SendDebug('NEO Toggle Install', "Es existiert bereits ein Toggle Skript für die Variable ".$StatusID."!", 0);
-            }
-            else
-            {
-                $ScriptID = IPS_CreateScript(0);
-                IPS_SetName($ScriptID, $ScriptName);
-                IPS_SetIdent($ScriptID, "Togglescript_".$StatusID."_".$InstanzID);
-                IPS_SetParent($ScriptID, $ScriptCategoryID);
-                $contentPowertoggle = '<?php
+                $Name = IPS_GetName($InstanzID);
+                $var_name = IPS_GetName($StatusID);
+                $ScriptName = $Name." ".$var_name." toggle";
+                $ScriptID = @IPS_GetObjectIDByIdent("Togglescript_".$StatusID."_".$InstanzID, $ScriptCategoryID);
+                if($ScriptID)
+                {
+                    $this->SendDebug('NEO Toggle Install', "Es existiert bereits ein Toggle Skript für die Variable ".$StatusID."!", 0);
+                }
+                else
+                {
+                    $ScriptID = IPS_CreateScript(0);
+                    IPS_SetName($ScriptID, $ScriptName);
+                    IPS_SetIdent($ScriptID, "Togglescript_".$StatusID."_".$InstanzID);
+                    IPS_SetParent($ScriptID, $ScriptCategoryID);
+                    $contentPowertoggle = '<?php
 $status = GetValueBoolean('.$StatusID.'); // Status des Geräts auslesen
 IPS_LogMessage( "'.$type.' '.$var_name.':" , "NEO Script toggle" );
 if ($status == false)// einschalten
@@ -147,9 +326,10 @@ elseif ($status == true)// ausschalten
       IPS_LogMessage( "'.$Name.' '.$var_name.':" , "Ausschalten" );
       RequestAction('.$StatusID.', false);
 	}';
-                IPS_SetScriptContent($ScriptID, $contentPowertoggle);
-                $this->SendDebug('NEO Toggle Install', "Es wurde ein Skript mit der Objekt ID  ".$ScriptID." für die Variable mit der Objekt ID ".$StatusID." angelegt!", 0);
-                IPS_LogMessage("NEO Toggle Install", "Es wurde ein Skript mit der Objekt ID  ".$ScriptID." für die Variable mit der Objekt ID ".$StatusID." angelegt!");
+                    IPS_SetScriptContent($ScriptID, $contentPowertoggle);
+                    $this->SendDebug('NEO Toggle Install', "Es wurde ein Skript mit der Objekt ID  ".$ScriptID." für die Variable mit der Objekt ID ".$StatusID." angelegt!", 0);
+                    IPS_LogMessage("NEO Toggle Install", "Es wurde ein Skript mit der Objekt ID  ".$ScriptID." für die Variable mit der Objekt ID ".$StatusID." angelegt!");
+                }
             }
         }
 
@@ -215,6 +395,14 @@ elseif ($status == true)// ausschalten
         {
             $check_homematic = $this->CheckModule('{EE4A81C6-5C90-4DB7-AD2F-F6BBD521412E}'); // Homematic
             $check_sonos = $this->CheckModule('{52F6586D-A1C7-AAC6-309B-E12A70F6EEF6}'); // Sonos
+            $check_echo_remote = $this->CheckModule('{496AB8B5-396A-40E4-AF41-32F4C48AC90D}'); // Echo Remote
+            $check_hue = $this->CheckModule('{83354C26-2732-427C-A781-B3F5CDF758B1}'); // Hue
+            $check_enigma2by = $this->CheckModule('{A2938F57-E1E2-427A-92FA-5F43EFF1F3FF}'); // Enigma 2 BY
+            $check_ps4 = $this->CheckModule('{D4AF1A75-D35E-4592-944D-67736220182E}'); // Playstation 4
+
+
+
+
             $form = [
                 [
                     'type'  => 'Label',
@@ -237,7 +425,43 @@ elseif ($status == true)// ausschalten
                     'type'    => 'Button',
                     'caption'   => 'Sonos Setup',
                     'onClick' => 'NEO_SetupSonosToggle($id);',
-                    'visible'  => $check_sonos]
+                    'visible'  => $check_sonos],
+                [
+                    'type'  => 'Label',
+                    'caption' => 'Setup toogle for Echo Remote Mute, Shuffle, Repeat variable',
+                    'visible'  => $check_echo_remote],
+                [
+                    'type'    => 'Button',
+                    'caption'   => 'Echo Remote Setup',
+                    'onClick' => 'NEO_SetupEchoRemoteToggle($id);',
+                    'visible'  => $check_echo_remote],
+                [
+                    'type'  => 'Label',
+                    'caption' => 'Setup toogle for Hue device HUE_State variable',
+                    'visible'  => $check_hue],
+                [
+                    'type'    => 'Button',
+                    'caption'   => 'Hue Setup',
+                    'onClick' => 'NEO_SetupHueToggle($id);',
+                    'visible'  => $check_hue],
+                [
+                    'type'  => 'Label',
+                    'caption' => 'Setup toogle for Enigma 2 BY Mute, AC3 Downmix variable',
+                    'visible'  => $check_enigma2by],
+                [
+                    'type'    => 'Button',
+                    'caption'   => 'Enigma 2 BY Setup',
+                    'onClick' => 'NEO_SetupEnigma2BYToggle($id);',
+                    'visible'  => $check_enigma2by],
+                [
+                    'type'  => 'Label',
+                    'caption' => 'Setup toogle for Playstation 4 PS4_Power variable',
+                    'visible'  => $check_ps4],
+                [
+                    'type'    => 'Button',
+                    'caption'   => 'Playstation 4 Setup',
+                    'onClick' => 'NEO_SetupPlaystationToggle($id);',
+                    'visible'  => $check_ps4]
             ];
             return $form;
         }
