@@ -50,7 +50,7 @@
             $this->SetupToggleScripts('Playstation 4', '{D4AF1A75-D35E-4592-944D-67736220182E}');
         }
 
-        public function NEO_Setup_FS20_AIO_Gateway_Toggle()
+        public function Setup_FS20_AIO_Gateway_Toggle()
         {
             $this->SetupToggleScripts('FS20 AIO Gateway', '{8C7554CA-2530-4E6B-98DB-AC59CD6215A6}');
         }
