@@ -258,7 +258,7 @@
                         $var_profile = IPS_GetVariable($variable)['VariableProfile'];
                         $custom_var_profile = IPS_GetVariable($variable)['VariableCustomProfile'];
                         $ident = IPS_GetObject($variable)['ObjectIdent'];
-                        if(($var_profile == "~Switch" || $custom_var_profile == "~Switch" || $var_profile == "SONOS.Switch" || $var_profile == "Echo.Remote.Mute"  || $var_profile == "E2BY.inaktiv.aktiv" || $var_profile == "E2BY.inaktiv.aktiv.Reversed") && ($ident == 'STATE' || $ident == 'Mute' || $ident == 'Loudness' || $ident == 'Crossfade' || $ident == 'EchoShuffle' || $ident == 'EchoRepeat' || $ident == 'HUE_State' || $ident == 'AC3DownmixStatusVAR' || $ident == 'MuteVAR' || $ident == 'PS4_Power'))
+                        if(($var_profile == "~Switch" || $custom_var_profile == "~Switch" || $var_profile == "SONOS.Switch" || $var_profile == "Echo.Remote.Mute"  || $var_profile == "E2BY.inaktiv.aktiv" || $var_profile == "E2BY.inaktiv.aktiv.Reversed") && ($ident == 'STATE' || $ident == 'Status' || $ident == 'Mute' || $ident == 'Loudness' || $ident == 'Crossfade' || $ident == 'EchoShuffle' || $ident == 'EchoRepeat' || $ident == 'HUE_State' || $ident == 'AC3DownmixStatusVAR' || $ident == 'MuteVAR' || $ident == 'PS4_Power'))
                         {
                             $name = IPS_GetName($InstanzID);
                             $instance_category = $this->CreateCategory($ScriptCategoryID, $name, $InstanzID);
