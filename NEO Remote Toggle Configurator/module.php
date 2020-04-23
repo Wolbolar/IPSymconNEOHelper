@@ -50,6 +50,11 @@
             $this->SetupToggleScripts('Playstation 4', '{D4AF1A75-D35E-4592-944D-67736220182E}');
         }
 
+        public function NEO_Setup_FS20_AIO_Gateway_Toggle()
+        {
+            $this->SetupToggleScripts('FS20 AIO Gateway', '{8C7554CA-2530-4E6B-98DB-AC59CD6215A6}');
+        }
+
         protected function SetupToggleScripts($type, $guid)
         {
             $cat_id = $this->ReadPropertyInteger('ImportCategoryID');
@@ -378,6 +383,7 @@ elseif ($status == true)// ausschalten
             $check_hue = $this->CheckModule('{83354C26-2732-427C-A781-B3F5CDF758B1}'); // Hue
             $check_enigma2by = $this->CheckModule('{A2938F57-E1E2-427A-92FA-5F43EFF1F3FF}'); // Enigma 2 BY
             $check_ps4 = $this->CheckModule('{D4AF1A75-D35E-4592-944D-67736220182E}'); // Playstation 4
+            $check_fs20 = $this->CheckModule('{8C7554CA-2530-4E6B-98DB-AC59CD6215A6}'); // FS20 AIO Gateway
 
 
 
@@ -440,7 +446,16 @@ elseif ($status == true)// ausschalten
                     'type'    => 'Button',
                     'caption'   => 'Playstation 4 Setup',
                     'onClick' => 'NEO_SetupPlaystationToggle($id);',
-                    'visible'  => $check_ps4]
+                    'visible'  => $check_ps4],
+                [
+                    'type'  => 'Label',
+                    'caption' => 'Setup toogle for FS20 AIO Gateway Power variable',
+                    'visible'  => $check_fs20],
+                [
+                    'type'    => 'Button',
+                    'caption'   => 'AIO Gateway FS20 Setup',
+                    'onClick' => 'NEO_Setup_FS20_AIO_Gateway_Toggle($id);',
+                    'visible'  => $check_fs20]
             ];
             return $form;
         }
