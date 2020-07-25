@@ -62,15 +62,59 @@ Then select the module and click _Install_
 
 #### NEO color picker
 
-.
+In order to be able to use a color picker in a NEO Remote for any device in IP-Symcon with which you can set a color, a Color Picker instance must be created.
+This serves as an intermediate instance for the NEO Remote, which takes the color value from the NEO Remote and then forwards the color value to the actual device, since the NEO Remote itself is currently not able to transfer the color value directly.
+
+To do this, first create a Neo Color Picker instance by pressing __+__ and then __*instance*__, i.e. filter you enter __neo color__.
+
+![color_picker_1](img/neo_color_picker_1.png?raw=true "Color Picker 1")
+
+
+The variable of the device that switches the color value must then be selected in the instance.
+
+![color_picker_2](img/neo_color_picker_2.png?raw=true "Color Picker 2")
 
 #### NEO page change / reload page
 
-.
+In order to be able to switch pages from IP-Symcon in a NEO remotely, a NEO page instance is created for the NEO page that is to be loaded.
+
+To do this, first create a Neo Color Picker instance by pressing __+__ and then __*instance*__, i.e. filter, enter __neo page__.
+
+ ![neo_page_1](img/neo_page_1.png?raw=true "NEO Page 1")
+ 
+In the newly created instance, enter the NEO Remote Name, as specified in the NEO Creator, in the text field _Remotename_.
+The page name of the NEO Remote page is entered in the field _page name_.
+ 
+![neo_page_2](img/neo_page_2.png?raw=true "NEO Page 2")
+ 
+You can then reload the page or switch to the NEO Remote page with an event on a device variable.
+ 
+In the example, a switch is made to a NEO remote page when motion is detected
+  
+![neo_page_3](img/neo_page_3.png?raw=true "NEO Page 3")
 
 #### Open / close NEO popup
 
-.
+In order to be able to open or close a popup from IP-Symcon in a NEO Remote, a NEO popup instance is created for the NEO popup, which should be opened / closed.
+
+To do this, first create a Neo Popup instance by pressing __+__ and then __*instance*__, i.e. filter, you enter __neo popup__.
+
+![neo_popup_1](img/neo_popup_1.png?raw=true "NEO Popup 1")
+
+In the newly created instance, enter the NEO Remote Name, as specified in the NEO Creator, in the text field _Remotename_.
+The popup name of the NEO Remote Popup page is entered in the _Popup Name_ field.
+
+![neo_popup_2](img/neo_popup_2.png?raw=true "NEO Popup 2")
+
+A pop-up can then open or close with an event on a variable of a device.
+ 
+In the example, a NEO Remote Popup is opened
+
+![neo_popup_3](img/neo_popup_3.png?raw=true "NEO Popup 3")
+
+In the example, a NEO Remote Popup is closed
+
+![neo_popup_4](img/neo_popup_4.png?raw=true "NEO Popup 4")
 
 #### mControl Server for addressing individual values in IP-Symcon
 
@@ -101,3 +145,11 @@ Then select the module and click _Install_
 #### NEO Color Picker:
 
 GUID: `{239B53F3-9C16-AB61-B919-11EF82072FC8}` 
+
+#### NEO Page:
+
+GUID: `{1C9BD973-E774-80F6-3292-28305F34A938}` 
+
+#### NEO Popup:
+
+GUID: `{EC5F5B4D-7855-7FC9-244E-E9FC0764F7AE}` 

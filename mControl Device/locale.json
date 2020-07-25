@@ -4,7 +4,10 @@
             "NEO mControl Device": "NEO mControl Gerät",
             "Creating instance.": "Instanz erstellen",
             "NEO mControl Device created.": "NEO mControl Gerät erzeugt.",
-            "interface closed.":"Interface geschlossen"
+            "interface closed.":"Interface geschlossen",
+            "Group": "Gruppe",
+            "Instance": "Instanz",
+            "Select an instance, each variable of the instance is called as an mControl device": "Selektiere eine Instanz, alle Variablen der Instanz werden als mControl Gerät angesprochen"
         }
     }
 }

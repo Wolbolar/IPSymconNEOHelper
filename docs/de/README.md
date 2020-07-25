@@ -66,15 +66,59 @@ drücken.
 
 #### NEO Farbwähler
 
-.
+Um einen Farbwähler in einer NEO Remote für jedes beliebige Gerät in IP-Symcon, bei dem man eine Farbe einstellen kann, nutzten zu können muss eine Color Picker Instanz angelegt werden.
+Diese dient als Zwischeninstanz für die NEO Remote die den Farbwert aus der NEO Remote eingegegen nimmt und dann den Farbwert an das eigentliche Gerät weiterreicht, da die NEO Remote selber zur Zeit nicht in der Lage ist den Farbwert direkt zu übergeben.
+
+Dazu wird zunächst eine Neo Color Picker Instanz erzeugt über drücken auf __+__ und dann __*Instanz*__, also Filter gibt man __neo color__ ein.
+
+![color_picker_1](img/neo_color_picker_1.png?raw=true "Color Picker 1")
+
+
+In der Instanz ist dann die Variable des Geräts auszuwählen, die den Farbwert schaltet.
+
+![color_picker_2](img/neo_color_picker_2.png?raw=true "Color Picker 2")
 
 #### NEO Seitenwechel / Seite neu laden
 
-.
+Um einen Seitenwechsel aus IP-Symcon in einer NEO Remote durchführen zu können wird eine NEO Page Instanz angelegt für die NEO Seite, die geladen werden soll.
+
+Dazu wird zunächst eine Neo Color Picker Instanz erzeugt über drücken auf __+__ und dann __*Instanz*__, also Filter gibt man __neo page__ ein.
+
+![neo_page_1](img/neo_page_1.png?raw=true "NEO Page 1")
+ 
+In der neu erstellten Instanz trägt man den NEO Remote Namen, wie im NEO Creator angegeben, in das Textfeld _Remotename_ ein.
+In das Feld _Seitenname_ wird der Seitenname der NEO Remote Seite eingetragen.
+ 
+![neo_page_2](img/neo_page_2.png?raw=true "NEO Page 2")
+ 
+Anschließend kann dann mit einem Ereignis auf einer Variable eines Geräts ein neu laden der Seite bzw. ein wechsel auf die zu NEO Remote Seite durchgeführt werden.
+ 
+In dem Beispiel wird bei Bewegungserkennung auf eine NEO Remote Seite gewechselt
+  
+![neo_page_3](img/neo_page_3.png?raw=true "NEO Page 3")
 
 #### NEO Popup öffnen / schließen
 
-.
+Um ein Popup aus IP-Symcon in einer NEO Remote öffnen oder schließen zu können, wird eine NEO Popup Instanz angelegt für das NEO Popup, die geöffnet/geschlossen werden soll.
+
+Dazu wird zunächst eine Neo Popup Instanz erzeugt über drücken auf __+__ und dann __*Instanz*__, also Filter gibt man __neo popup__ ein.
+
+![neo_popup_1](img/neo_popup_1.png?raw=true "NEO Popup 1")
+
+In der neu erstellten Instanz trägt man den NEO Remote Namen, wie im NEO Creator angegeben, in das Textfeld _Remotename_ ein.
+In das Feld _Popup Name_ wird der Popup Name der NEO Remote Popup Seite eingetragen.
+
+![neo_popup_2](img/neo_popup_2.png?raw=true "NEO Popup 2")
+
+Anschließend kann dann mit einem Ereignis auf einer Variable eines Geräts ein Popup öffnen bzw. schließen.
+ 
+In dem Beispiel wird ein NEO Remote Popup geöffnet
+
+![neo_popup_3](img/neo_popup_3.png?raw=true "NEO Popup 3")
+
+In dem Beispiel wird ein NEO Remote Popup geschlossen
+
+![neo_popup_4](img/neo_popup_4.png?raw=true "NEO Popup 4")
 
 #### mControl Server zum Ansprechen von einzelnen Werten in IP-Symcon
 
@@ -108,3 +152,11 @@ drücken.
 #### NEO Color Picker:
 
 GUID: `{239B53F3-9C16-AB61-B919-11EF82072FC8}` 
+
+#### NEO Page:
+
+GUID: `{1C9BD973-E774-80F6-3292-28305F34A938}` 
+
+#### NEO Popup:
+
+GUID: `{EC5F5B4D-7855-7FC9-244E-E9FC0764F7AE}` 
